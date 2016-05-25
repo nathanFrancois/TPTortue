@@ -36,6 +36,8 @@ public class FenetreView extends JFrame {
     private FeuilleDessin feuilleDessin;
     private JTextField inputValue;
 	private JToolBar toolBar;
+    private JMenu menuCommandes;
+    private JPanel panelBas;
 
 	private FenetreController fenetreController;
 
@@ -59,7 +61,7 @@ public class FenetreView extends JFrame {
         addButton(toolBar,"Effacer","Nouveau dessin","/icons/index.png");
 
         toolBar.add(Box.createRigidArea(HGAP));
-        inputValue=new JTextField("45",5);
+        inputValue=new JTextField("45", 5);
         toolBar.add(inputValue);
         addButton(toolBar, "Avancer", "Avancer 50", null);
         addButton(toolBar, "Droite", "Droite 45", null);
@@ -86,7 +88,7 @@ public class FenetreView extends JFrame {
         addMenuItem(menuFile, "Effacer", "Effacer", KeyEvent.VK_N);
         addMenuItem(menuFile, "Quitter", "Quitter", KeyEvent.VK_Q);
 
-        JMenu menuCommandes=new JMenu("Commandes"); // on installe le premier menu
+        menuCommandes = new JMenu("Commandes"); // on installe le premier menu
         menubar.add(menuCommandes);
         addMenuItem(menuCommandes, "Avancer", "Avancer", -1);
         addMenuItem(menuCommandes, "Droite", "Droite", -1);
@@ -101,20 +103,21 @@ public class FenetreView extends JFrame {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        // les boutons du bas
-        JPanel p2 = new JPanel(new GridLayout());
+        panelBas = new JPanel(new GridLayout());
+
         JButton b20 = new JButton("Proc1");
-        p2.add(b20);
+        panelBas.add(b20);
         b20.addActionListener(fenetreController);
+
         JButton b21 = new JButton("Proc2");
-        p2.add(b21);
+        panelBas.add(b21);
         b21.addActionListener(fenetreController);
+
         JButton b22 = new JButton("Proc3");
-        p2.add(b22);
+        panelBas.add(b22);
         b22.addActionListener(fenetreController);
 
-        getContentPane().add(p2,"South");
-
+        getContentPane().add(panelBas,"South");
         getContentPane().add(feuilleDessin,"Center");
 
         pack();
@@ -155,6 +158,18 @@ public class FenetreView extends JFrame {
             else
                 menuItem.setAccelerator(KeyStroke.getKeyStroke(key, 0, false));
         }
+    }
+
+    public void disableButton(){
+
+        menuCommandes.setEnabled(false);
+        menuCommandes.setVisible(false);
+
+        toolBar.setEnabled(false);
+        toolBar.setVisible(false);
+
+        panelBas.setVisible(false);
+        panelBas.setEnabled(false);
     }
 
     public FeuilleDessin getFeuille() {
