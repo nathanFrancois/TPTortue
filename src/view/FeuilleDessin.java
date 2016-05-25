@@ -8,23 +8,24 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import model.Model;
+import model.FeuilleModel;
 import model.TortueModel;
 
 public class FeuilleDessin extends JPanel {
 
 	private static final long serialVersionUID = -5081539632093544214L;
 	
-	private List<TortueView> listTortues;
+	private List<TortueView> listTortuesView;
 
-    public FeuilleDessin(Model model) {
+    public FeuilleDessin(FeuilleModel feuilleModel) {
         super();
         setBackground(Color.white);
         setSize(new Dimension(600,400));
         setPreferredSize(new Dimension(600,400));
-        this.listTortues = new ArrayList<TortueView>();
-        for (TortueModel tortueModel : model.getListTortues()) {
-        	listTortues.add(new TortueView(tortueModel));
+        this.listTortuesView = new ArrayList<TortueView>();
+
+        for (TortueModel tortueModel : feuilleModel.getListTortues()) {
+        	listTortuesView.add(new TortueView(tortueModel));
         }
     }
 
@@ -42,7 +43,7 @@ public class FeuilleDessin extends JPanel {
     }
 
     public void showTurtles(Graphics g) {
-        for (TortueView tortueView : listTortues) {
+        for (TortueView tortueView : listTortuesView) {
             tortueView.drawTurtle(g);
         }
     }

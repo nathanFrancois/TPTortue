@@ -1,6 +1,6 @@
 import javax.swing.SwingUtilities;
 
-import model.Model;
+import model.FeuilleModel;
 import view.FenetreView;
 
 public class Main {
@@ -9,7 +9,7 @@ public class Main {
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                Model model = new Model();
+                FeuilleModel model = new FeuilleModel();
                 FenetreView fenetreView = new FenetreView(model);
                 fenetreView.setVisible(true);
             }

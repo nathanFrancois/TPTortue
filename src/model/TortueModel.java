@@ -4,9 +4,9 @@ import java.awt.Point;
 import java.util.List;
 
 public class TortueModel {
+
     private static final int rp=10, rb=5;
     private static final double ratioDegRad = 0.0174533;
-
     private List<SegmentModel> listSegments;
     private int x, y;
     private int dir;

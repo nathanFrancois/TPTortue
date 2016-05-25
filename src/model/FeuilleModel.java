@@ -3,11 +3,11 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Model {
+public class FeuilleModel {
 	
 	private List<TortueModel> listTortues;
 	
-	public Model() {
+	public FeuilleModel() {
 		listTortues = new ArrayList<>();
 		TortueModel tortueModel = new TortueModel();
 		tortueModel.setPosition(500/2, 400/2);

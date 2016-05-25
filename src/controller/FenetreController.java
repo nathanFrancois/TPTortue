@@ -3,16 +3,16 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import model.Model;
+import model.FeuilleModel;
 import model.TortueModel;
 import view.FenetreView;
 
 public class FenetreController implements ActionListener {
 
     private FenetreView fenetreView;
-    private Model model;
+    private FeuilleModel model;
 
-    public FenetreController(FenetreView fenetreView, Model model) {
+    public FenetreController(FenetreView fenetreView, FeuilleModel model) {
         this.fenetreView = fenetreView;
         this.model = model;
     }

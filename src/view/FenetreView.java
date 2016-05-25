@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
-import model.Model;
+import model.FeuilleModel;
 import controller.FenetreController;
 
 public class FenetreView extends JFrame {
@@ -39,7 +39,7 @@ public class FenetreView extends JFrame {
 
 	private FenetreController fenetreController;
 
-    public FenetreView(Model model) {
+    public FenetreView(FeuilleModel model) {
         super();
         fenetreController = new FenetreController(this, model);
         feuilleDessin = new FeuilleDessin(model);
