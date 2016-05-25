@@ -41,6 +41,8 @@ public class FenetreView extends JFrame {
 
 	private FenetreController fenetreController;
 
+	private JComboBox colorList;
+
     public FenetreView(FeuilleModel model) {
         super();
         fenetreController = new FenetreController(this, model);
@@ -77,7 +79,8 @@ public class FenetreView extends JFrame {
         toolBar.add(Box.createRigidArea(HGAP));
         JLabel colorLabel = new JLabel("   Couleur: ");
         toolBar.add(colorLabel);
-        JComboBox colorList = new JComboBox(colorStrings);
+        colorList = new JComboBox(colorStrings);
+        colorList.setActionCommand("colorList");
         toolBar.add(colorList);
 
         JMenuBar menubar=new JMenuBar();
@@ -179,4 +182,8 @@ public class FenetreView extends JFrame {
     public void setFeuille(FeuilleDessin feuille) {
         this.feuilleDessin = feuille;
     }
+
+	public JComboBox getColorList() {
+		return colorList;
+	}
 }

@@ -4,12 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
-import java.util.Observable;
-import java.util.Observer;
 
+import model.SegmentModel;
 import model.TortueModel;
 
-public class TortueView implements Observer {
+public class TortueView {
 
     private TortueModel tortueModel;
 
@@ -20,6 +19,10 @@ public class TortueView implements Observer {
     public void drawTurtle(Graphics graph) {
         if (graph==null)
             return;
+        //TODO: améliorer
+        for (SegmentModel segmentModel : tortueModel.getListSegments()) {
+        	new SegmentView(segmentModel, this).drawSegment(graph);
+        }
 
         Point p = new Point(tortueModel.getX(),tortueModel.getY());
         Polygon arrow = new Polygon();
@@ -49,9 +52,26 @@ public class TortueView implements Observer {
     public void setTortueModel(TortueModel tortueModel) {
         this.tortueModel = tortueModel;
     }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
+    
+    private Color decodeColor(int c) {
+		switch(c) {
+			case 0: return(Color.black);
+			case 1: return(Color.blue);
+			case 2: return(Color.cyan);
+			case 3: return(Color.darkGray);
+			case 4: return(Color.red);
+			case 5: return(Color.green);
+			case 6: return(Color.lightGray);
+			case 7: return(Color.magenta);
+			case 8: return(Color.orange);
+			case 9: return(Color.gray);
+			case 10: return(Color.pink);
+			case 11: return(Color.yellow);
+			default : return(Color.black);
+		}
+	}
+    
+    public Color getColor() {
+    	return decodeColor(tortueModel.getCouleur());
     }
 }
