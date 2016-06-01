@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.RunnableFuture;
 
 public class FeuilleModel {
 	
@@ -16,26 +15,23 @@ public class FeuilleModel {
 	}
 
 	public void tortueAleatoire() {
-
-		Thread thread = new Thread() {
-			public void run(){
-				for(int i = 0 ; i<3 ; i++){
-					int v = 15;
-					for (TortueModel tortueModel : getListTortues()) {
-						tortueModel.avancer(v);
-					}
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
+		for (int i = 0 ; i<3 ; i++) {
+			int v = 15;
+			for (TortueModel tortueModel : getListTortues()) {
+				tortueModel.avancer(v);
 			}
-		};
-
-		thread.start();
+			tempo();
+		}
 	}
 	
+	private void tempo() {
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void addTortue(TortueModel tortueModel) {
 		listTortues.add(tortueModel);
 	}

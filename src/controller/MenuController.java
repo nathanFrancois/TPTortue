@@ -1,16 +1,23 @@
 package controller;
 
-import model.FeuilleModel;
-import model.TortueModel;
-import view.FenetreView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import model.FeuilleModel;
+import view.FenetreView;
+import view.MenuView;
+
 public class MenuController implements ActionListener {
 
+    private FeuilleModel model;
+	private FenetreView fenetreView;
+	private MenuView menuView;
 
-    public MenuController() {
+	public MenuController(MenuView menuView) {
         super();
+        this.menuView = menuView;
+        model = new FeuilleModel();
+        fenetreView = new FenetreView(model);
     }
 
     @Override
@@ -20,19 +27,20 @@ public class MenuController implements ActionListener {
 
         switch (command) {
             case "Tortue guidée":
-                FeuilleModel model = new FeuilleModel();
-                FenetreView fenetreView = new FenetreView(model);
-                fenetreView.setVisible(true);
-
+            	fenetreView.setVisible(true);
+            	menuView.setVisible(false);
                 break;
 
             case "Tortue aléatoire":
-                FeuilleModel model1 = new FeuilleModel();
-                FenetreView fenetreView1 = new FenetreView(model1);
-                fenetreView1.disableButton();
-                fenetreView1.setVisible(true);
-                model1.tortueAleatoire();
-
+            	Thread thread = new Thread() {
+        			public void run() {
+        				fenetreView.setVisible(true);
+        				menuView.setVisible(false);
+        				fenetreView.disableButton();
+                        model.tortueAleatoire();
+        			}
+            	};
+            	thread.run();
                 break;
         }
     }

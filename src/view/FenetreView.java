@@ -124,7 +124,7 @@ public class FenetreView extends JFrame {
         getContentPane().add(feuilleDessin,"Center");
 
         pack();
-        setVisible(true);
+        setLocationRelativeTo(null);
     }
 
     public void addButton(JComponent p, String name, String tooltiptext, String imageName) {
@@ -163,7 +163,7 @@ public class FenetreView extends JFrame {
         }
     }
 
-    public void disableButton(){
+    public void disableButton() {
 
         menuCommandes.setEnabled(false);
         menuCommandes.setVisible(false);
