@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import model.FeuilleModel;
+import model.TortueModel;
 import view.FenetreView;
 import view.MenuView;
 
@@ -37,6 +38,11 @@ public class MenuController implements ActionListener {
         				fenetreView.setVisible(true);
         				menuView.setVisible(false);
         				fenetreView.disableButton();
+        				for (int i=0; i<9; i++) {
+        					TortueModel tortueModel = new TortueModel();
+        					tortueModel.addObserver(fenetreView.getFeuille());
+        					model.addTortue(tortueModel);
+        				}
                         model.tortueAleatoire();
         			}
             	};

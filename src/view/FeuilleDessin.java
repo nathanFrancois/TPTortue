@@ -3,8 +3,6 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,19 +14,17 @@ import model.TortueModel;
 public class FeuilleDessin extends JPanel implements Observer {
 
 	private static final long serialVersionUID = -5081539632093544214L;
+	private FeuilleModel feuilleModel;
 	
-	private List<TortueView> listTortuesView;
-
     public FeuilleDessin(FeuilleModel feuilleModel) {
         super();
+        this.feuilleModel = feuilleModel;
         setBackground(Color.white);
         setSize(new Dimension(600,400));
         setPreferredSize(new Dimension(600,400));
-        this.listTortuesView = new ArrayList<TortueView>();
 
         for (TortueModel tortueModel : feuilleModel.getListTortues()) {
         	tortueModel.addObserver(this);
-        	listTortuesView.add(new TortueView(tortueModel));
         }
     }
 
@@ -46,8 +42,8 @@ public class FeuilleDessin extends JPanel implements Observer {
     }
 
     public void showTurtles(Graphics g) {
-        for (TortueView tortueView : listTortuesView) {
-            tortueView.drawTurtle(g);
+        for (TortueModel tortueModel : feuilleModel.getListTortues()) {
+            new TortueView(tortueModel).drawTurtle(g);
         }
     }
 

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.SegmentModel;
 import model.TortueModel;
@@ -20,8 +22,10 @@ public class TortueView {
         if (graph==null)
             return;
         
-        for (SegmentModel segmentModel : tortueModel.getListSegments()) {
-        	graph.setColor(decodeColor(segmentModel.getCouleur()));
+        //Copie de la liste pour eviter les acces concurrents
+        List<SegmentModel> listSegments = new ArrayList<SegmentModel>(tortueModel.getListSegments());
+        for (SegmentModel segmentModel : listSegments) {
+        	graph.setColor(Utils.decodeColor(segmentModel.getCouleur()));
     		graph.drawLine(segmentModel.getPtStart().x, segmentModel.getPtStart().y, segmentModel.getPtEnd().x, segmentModel.getPtEnd().y);
         }
 
@@ -54,25 +58,7 @@ public class TortueView {
         this.tortueModel = tortueModel;
     }
     
-    private Color decodeColor(int c) {
-		switch(c) {
-			case 0: return(Color.black);
-			case 1: return(Color.blue);
-			case 2: return(Color.cyan);
-			case 3: return(Color.darkGray);
-			case 4: return(Color.red);
-			case 5: return(Color.green);
-			case 6: return(Color.lightGray);
-			case 7: return(Color.magenta);
-			case 8: return(Color.orange);
-			case 9: return(Color.gray);
-			case 10: return(Color.pink);
-			case 11: return(Color.yellow);
-			default : return(Color.black);
-		}
-	}
-    
     public Color getColor() {
-    	return decodeColor(tortueModel.getCouleur());
+    	return Utils.decodeColor(tortueModel.getCouleur());
     }
 }
