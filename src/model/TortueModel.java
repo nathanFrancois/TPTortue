@@ -17,16 +17,17 @@ public class TortueModel extends Observable {
 
 	public TortueModel() {
     	listSegments = new ArrayList<SegmentModel>();
-    	couleur = 0;
+    	reset();
     }
     
     public void reset() {
-		x = 0;
-		y = 0;
+		x = 300;
+		y = 200;
 		dir = -90;
 		couleur = 0;
 		crayon = true;
 		listSegments.clear();
+		draw();
   	}
 
     public void avancer(int dist) {
@@ -46,6 +47,7 @@ public class TortueModel extends Observable {
 
             seg.setPtStart(pointStart);
             seg.setPtEnd(pointEnd);
+            seg.setCouleur(couleur);
 
             listSegments.add(seg);
         }

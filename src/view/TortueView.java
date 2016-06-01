@@ -19,9 +19,10 @@ public class TortueView {
     public void drawTurtle(Graphics graph) {
         if (graph==null)
             return;
-        //TODO: améliorer
+        
         for (SegmentModel segmentModel : tortueModel.getListSegments()) {
-        	new SegmentView(segmentModel, this).drawSegment(graph);
+        	graph.setColor(decodeColor(segmentModel.getCouleur()));
+    		graph.drawLine(segmentModel.getPtStart().x, segmentModel.getPtStart().y, segmentModel.getPtEnd().x, segmentModel.getPtEnd().y);
         }
 
         Point p = new Point(tortueModel.getX(),tortueModel.getY());

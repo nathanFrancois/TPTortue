@@ -81,6 +81,7 @@ public class FenetreView extends JFrame {
         toolBar.add(colorLabel);
         colorList = new JComboBox(colorStrings);
         colorList.setActionCommand("colorList");
+        colorList.addActionListener(fenetreController);
         toolBar.add(colorList);
 
         JMenuBar menubar=new JMenuBar();
@@ -186,4 +187,9 @@ public class FenetreView extends JFrame {
 	public JComboBox getColorList() {
 		return colorList;
 	}
+
+	public JTextField getInputValue() {
+		return inputValue;
+	}
+
 }

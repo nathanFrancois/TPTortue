@@ -21,15 +21,14 @@ public class FenetreController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String c = e.getActionCommand();
 
-        // actions des boutons du haut
         switch (c) {
             case "Avancer":
                 System.out.println("command avancer");
                 try {
-                    int v = 15;
-                    for (TortueModel tortueModel : model.getListTortues()) {
-                    	tortueModel.avancer(v);
-                    }
+                    int v = getInputValue();
+	            	for (TortueModel tortueModel : model.getListTortues()) {
+	                	tortueModel.avancer(v);
+	                }
                 } catch (NumberFormatException ex) {
                     System.err.println("ce n'est pas un nombre");
                 }
@@ -37,7 +36,7 @@ public class FenetreController implements ActionListener {
                 break;
             case "Droite":
                 try {
-                    int v = 15;
+                    int v = getInputValue();
                     for (TortueModel tortueModel : model.getListTortues()) {
                     	tortueModel.droite(v);
                     }
@@ -47,7 +46,7 @@ public class FenetreController implements ActionListener {
                 break;
             case "Gauche":
                 try {
-                    int v = 15;
+                    int v = getInputValue();
                     for (TortueModel tortueModel : model.getListTortues()) {
                     	tortueModel.gauche(v);
                     }
@@ -81,18 +80,27 @@ public class FenetreController implements ActionListener {
                 }
             	break;
             case "Effacer":
-            	//TODO
+            	model.reset();
             	break;
             case "Quitter":
-            	//TODO
+            	System.exit(0);
             	break;
-            	//TODO: corriger
             case "colorList":
             	int n = fenetreView.getColorList().getSelectedIndex();
+            	System.out.println("Nouvelle couleur : " + n);
             	for (TortueModel tortueModel : model.getListTortues()) {
             		tortueModel.setCouleur(n);
                 }
             	break;
         }
+    }
+    
+    private int getInputValue() {
+    	try {
+			return Integer.parseInt(fenetreView.getInputValue().getText());
+		} catch (NumberFormatException ex){
+			System.err.println("Ce n'est pas un nombre : " + fenetreView.getInputValue().getText());
+		}
+		return 0;
     }
 }

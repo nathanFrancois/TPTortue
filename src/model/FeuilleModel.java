@@ -10,17 +10,16 @@ public class FeuilleModel {
 	public FeuilleModel() {
 		listTortues = new ArrayList<>();
 		TortueModel tortueModel = new TortueModel();
-		tortueModel.setPosition(500/2, 400/2);
 		listTortues.add(tortueModel);
 	}
 
 	public void tortueAleatoire() {
+		int v = 15;
 		for (int i = 0 ; i<3 ; i++) {
-			int v = 15;
+			tempo();
 			for (TortueModel tortueModel : getListTortues()) {
 				tortueModel.avancer(v);
 			}
-			tempo();
 		}
 	}
 	
@@ -42,6 +41,12 @@ public class FeuilleModel {
 	
 	public TortueModel getFirstTortueModel() {
 		return listTortues.get(0);
+	}
+
+	public void reset() {
+		for (TortueModel tortueModel : listTortues) {
+			tortueModel.reset();
+		}
 	}
 
 }

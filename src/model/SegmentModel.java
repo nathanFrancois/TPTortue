@@ -5,6 +5,7 @@ import java.awt.*;
 public class SegmentModel {
 
     private Point ptStart, ptEnd;
+    private int couleur;
 
     public SegmentModel() {
         ptStart = new Point(0,0);
@@ -26,4 +27,12 @@ public class SegmentModel {
     public Point getPtStart() {
         return ptStart;
     }
+
+	public int getCouleur() {
+		return couleur;
+	}
+
+	public void setCouleur(int couleur) {
+		this.couleur = couleur;
+	}
 }

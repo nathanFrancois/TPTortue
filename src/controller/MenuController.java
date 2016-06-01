@@ -40,7 +40,7 @@ public class MenuController implements ActionListener {
                         model.tortueAleatoire();
         			}
             	};
-            	thread.run();
+            	thread.start();
                 break;
         }
     }
