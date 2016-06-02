@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 
 public class Utils {
 	
@@ -20,6 +22,23 @@ public class Utils {
 			case 11: return(Color.yellow);
 			default : return(Color.black);
 		}
+	}
+	
+	public static Point recadrer(Point point, Dimension dimension) {
+		Point p = new Point(point.x, point.y);
+		if (p.getX() < 0) {
+            p.setLocation((dimension.getWidth() + (p.getX()%dimension.getWidth())), p.getY());
+        }
+        if (p.getX() > dimension.getWidth()) {
+            p.setLocation(p.getX()%dimension.getWidth(), p.getY());
+        }
+        if (p.getY() < 0) {
+            p.setLocation(p.getX(), (dimension.getHeight() + (p.getY()%dimension.getHeight())));
+        }
+        if (p.getY() > dimension.getHeight()) {
+            p.setLocation(p.getX(), p.getY()%dimension.getHeight());
+        }
+        return p;
 	}
 	
 }

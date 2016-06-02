@@ -43,7 +43,7 @@ public class FeuilleDessin extends JPanel implements Observer {
 
     public void showTurtles(Graphics g) {
         for (TortueModel tortueModel : feuilleModel.getListTortues()) {
-            new TortueView(tortueModel).drawTurtle(g);
+            new TortueView(tortueModel).drawTurtle(g, getSize());
         }
     }
 

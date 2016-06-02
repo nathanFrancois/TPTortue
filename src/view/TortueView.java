@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
@@ -18,18 +19,17 @@ public class TortueView {
         this.tortueModel = tortueModel;
     }
 
-    public void drawTurtle(Graphics graph) {
+    public void drawTurtle(Graphics graph, Dimension dimension) {
         if (graph==null)
             return;
         
         //Copie de la liste pour eviter les acces concurrents
         List<SegmentModel> listSegments = new ArrayList<SegmentModel>(tortueModel.getListSegments());
         for (SegmentModel segmentModel : listSegments) {
-        	graph.setColor(Utils.decodeColor(segmentModel.getCouleur()));
-    		graph.drawLine(segmentModel.getPtStart().x, segmentModel.getPtStart().y, segmentModel.getPtEnd().x, segmentModel.getPtEnd().y);
+        	new SegmentView(segmentModel).drawSegment(graph, dimension);
         }
 
-        Point p = new Point(tortueModel.getX(),tortueModel.getY());
+        Point p = Utils.recadrer(new Point(tortueModel.getX(),tortueModel.getY()), dimension);
         Polygon arrow = new Polygon();
 
         double theta=TortueModel.getRatioDegRad()*(-tortueModel.getDir());
