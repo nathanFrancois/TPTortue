@@ -43,7 +43,6 @@ public class FeuilleModel {
 	}
 
 	private boolean getRandomBoolean() {
-		Random random = new Random();
 		return random.nextBoolean();
 	}
 
