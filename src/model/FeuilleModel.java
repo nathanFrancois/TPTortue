@@ -16,25 +16,39 @@ public class FeuilleModel {
 	}
 
 	public void tortueAleatoire() {
-		int v = 10;
-		int action = 0;
+		boolean orientation = false;
+		int vitesse = 0;
+		int angle = 0;
+
 		while (true) {
 			tempo(100);
-			for (TortueModel tortueModel : listTortues) {
-				action = random.nextInt(3);
-				switch (action) {
-				case 0:
-					tortueModel.avancer(v);
-					break;
-				case 1:
-					tortueModel.droite(v);
-					break;
-				case 2:
-					tortueModel.gauche(v);
-					break;
-				}
+			for (TortueModel tortueModel : getListTortues()) {
+
+				orientation = getRandomBoolean();
+				vitesse = getRandomSpeed();
+				angle = getRandomAngle();
+
+				if(orientation)
+					tortueModel.droite(angle);
+				else
+					tortueModel.gauche(angle);
+
+				tortueModel.avancer(vitesse);
 			}
 		}
+	}
+
+	private int getRandomSpeed() {
+		return (int) (Math.random() * 50);
+	}
+
+	private boolean getRandomBoolean() {
+		Random random = new Random();
+		return random.nextBoolean();
+	}
+
+	private int getRandomAngle() {
+		return (int) (Math.random() * 360);
 	}
 	
 	private void tempo(int t) {
