@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.image.BufferedImage;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,10 +12,9 @@ public class MenuView extends JFrame {
 	
 	private MenuController menuController;
     private JPanel mainPanel;
-    private JButton simpleGame;
-    private JButton multiGame;
-    private BufferedImage image;
-
+    private JButton tortueGuidee;
+    private JButton tortueAleatoire;
+    private JButton tortueIntelligente;
 
     public MenuView() {
         menuController = new MenuController(this);
@@ -31,18 +28,24 @@ public class MenuView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         mainPanel = new JPanel();
-        simpleGame = new JButton();
-        simpleGame.setSize(30, 10);
-        simpleGame.setText("Tortue guidée");
-        simpleGame.addActionListener(menuController);
+        tortueGuidee = new JButton();
+        tortueGuidee.setSize(30, 10);
+        tortueGuidee.setText("Tortue guidée");
+        tortueGuidee.addActionListener(menuController);
 
-        multiGame = new JButton();
-        multiGame.setSize(30, 10);
-        multiGame.setText("Tortue aléatoire");
-        multiGame.addActionListener(menuController);
+        tortueAleatoire = new JButton();
+        tortueAleatoire.setSize(30, 10);
+        tortueAleatoire.setText("Tortue aléatoire");
+        tortueAleatoire.addActionListener(menuController);
+        
+        tortueIntelligente = new JButton();
+        tortueIntelligente.setSize(30, 10);
+        tortueIntelligente.setText("Tortue intelligente");
+        tortueIntelligente.addActionListener(menuController);
 
-        mainPanel.add(simpleGame);
-        mainPanel.add(multiGame);
+        mainPanel.add(tortueGuidee);
+        mainPanel.add(tortueAleatoire);
+        mainPanel.add(tortueIntelligente);
 
         add(mainPanel);
         setLocationRelativeTo(null);

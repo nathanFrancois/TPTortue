@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Random;
 
 public class TortueModel extends Observable {
 
@@ -14,15 +15,19 @@ public class TortueModel extends Observable {
     private int dir;
     private boolean crayon;
     private int couleur;
+    private int xInit, yInit;
 
 	public TortueModel() {
     	listSegments = new ArrayList<SegmentModel>();
+    	Random random = new Random();
+    	xInit = random.nextInt(2000);
+    	yInit = random.nextInt(2000);
     	reset();
     }
     
     public void reset() {
-		x = 300;
-		y = 200;
+		x = xInit;
+		y = yInit;
 		dir = -90;
 		couleur = 0;
 		crayon = true;
