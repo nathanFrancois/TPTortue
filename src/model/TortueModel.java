@@ -11,17 +11,19 @@ public class TortueModel extends Observable {
     private static final int rp=10, rb=5;
     private static final double ratioDegRad = 0.0174533;
     private List<SegmentModel> listSegments;
-    private int x, y;
+    private int x;
+    private int y;
     private int dir;
     private boolean crayon;
     private int couleur;
     private int xInit, yInit;
+    private int vitesse;
 
 	public TortueModel() {
     	listSegments = new ArrayList<SegmentModel>();
     	Random random = new Random();
-    	xInit = random.nextInt(2000);
-    	yInit = random.nextInt(2000);
+    	xInit = random.nextInt(1000);
+    	yInit = random.nextInt(1000);
     	reset();
     }
     
@@ -35,9 +37,9 @@ public class TortueModel extends Observable {
 		draw();
   	}
 
-    public void avancer(int dist) {
-        int newX = (int) Math.round(x+dist*Math.cos(ratioDegRad*dir));
-        int newY = (int) Math.round(y+dist*Math.sin(ratioDegRad*dir));
+    public void avancer() {
+        int newX = (int) Math.round(x+vitesse*Math.cos(ratioDegRad*dir));
+        int newY = (int) Math.round(y+vitesse*Math.sin(ratioDegRad*dir));
 
         if (crayon) {
             SegmentModel seg = new SegmentModel();
@@ -59,7 +61,6 @@ public class TortueModel extends Observable {
 
         setPosition(newX, newY);
         draw();
-        System.out.println(newX);
     }
     
     private void draw() {
@@ -75,11 +76,16 @@ public class TortueModel extends Observable {
 
     public void droite(int ang) {
         dir = (dir + ang) % 360;
+        if(dir < 0)
+            dir =+ 360;
+        System.out.println(dir);
         draw();
     }
 
     public void gauche(int ang) {
         dir = (dir - ang) % 360;
+        if(dir < 0)
+            dir =+ 360;
         draw();
     }
 
@@ -121,6 +127,14 @@ public class TortueModel extends Observable {
         draw();
     }
 
+    public int getVitesse() {
+        return vitesse;
+    }
+
+    public void setVitesse(int vitesse) {
+        this.vitesse = vitesse;
+    }
+
     public int getDir() {
         return dir;
     }
@@ -155,14 +169,16 @@ public class TortueModel extends Observable {
 	
 	public void carre() {
 		for (int i=0;i<4;i++) {
-			avancer(100);
+            setVitesse(100);
+			avancer();
 			droite(90);
 		}
 	}
 
 	public void poly(int n, int a) {
 		for (int j=0;j<a;j++) {
-			avancer(n);
+            setVitesse(n);
+			avancer();
 			droite(360/a);
 		}
 	}
@@ -170,7 +186,8 @@ public class TortueModel extends Observable {
 	public void spiral(int n, int k, int a) {
 		for (int i = 0; i < k; i++) {
 			couleur(couleur+1);
-			avancer(n);
+            setVitesse(n);
+			avancer();
 			droite(360/a);
 			n = n+1;
 		}

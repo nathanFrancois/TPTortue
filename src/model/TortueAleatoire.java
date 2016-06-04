@@ -29,7 +29,8 @@ public class TortueAleatoire extends TortueModel implements TortueMobile {
 		} else {
 			gauche(angle);
 		}
-		avancer(vitesse);
+		setVitesse(vitesse);
+		avancer();
 	}
 	
 	private void randomVitesse() {

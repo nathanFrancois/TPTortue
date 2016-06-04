@@ -21,7 +21,8 @@ public class TestTortueModel {
 		int x = tortueModel.getX();
 		int y = tortueModel.getY();
 		tortueModel.setDir(-90);
-		tortueModel.avancer(1);
+		tortueModel.setVitesse(1);
+		tortueModel.avancer();
 		assertEquals(x, tortueModel.getX());
 		assertEquals(y-1, tortueModel.getY());
 	}
@@ -32,7 +33,8 @@ public class TestTortueModel {
 		int x = tortueModel.getX();
 		int y = tortueModel.getY();
 		tortueModel.setDir(0);
-		tortueModel.avancer(2);
+		tortueModel.setVitesse(2);
+		tortueModel.avancer();
 		assertEquals(x+2, tortueModel.getX());
 		assertEquals(y, tortueModel.getY());
 	}
@@ -43,7 +45,8 @@ public class TestTortueModel {
 		int x = tortueModel.getX();
 		int y = tortueModel.getY();
 		tortueModel.setDir(90);
-		tortueModel.avancer(3);
+		tortueModel.setVitesse(3);
+		tortueModel.avancer();
 		assertEquals(x, tortueModel.getX());
 		assertEquals(y+3, tortueModel.getY());
 	}
@@ -54,7 +57,8 @@ public class TestTortueModel {
 		int x = tortueModel.getX();
 		int y = tortueModel.getY();
 		tortueModel.setDir(180);
-		tortueModel.avancer(4);
+		tortueModel.setVitesse(4);
+		tortueModel.avancer();
 		assertEquals(x-4, tortueModel.getX());
 		assertEquals(y, tortueModel.getY());
 	}
@@ -65,12 +69,13 @@ public class TestTortueModel {
 		int x = tortueModel.getX();
 		int y = tortueModel.getY();
 		tortueModel.setDir(-90);
-		
-		tortueModel.avancer(0);
+		tortueModel.setVitesse(0);
+		tortueModel.avancer();
 		assertEquals(x, tortueModel.getX());
 		assertEquals(y, tortueModel.getY());
-		
-		tortueModel.avancer(-1);
+
+		tortueModel.setVitesse(-1);
+		tortueModel.avancer();
 		assertEquals(x, tortueModel.getX());
 		assertEquals(y + 1, tortueModel.getY());
 	}

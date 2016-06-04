@@ -32,7 +32,20 @@ public class TortueView {
         	segmentView.drawSegment(graph, dimension);
         }
 
-        Point p = Utils.recadrer(new Point(tortueModel.getX(),tortueModel.getY()), dimension);
+        if (tortueModel.getX() < 0) {
+            tortueModel.setX((int)(dimension.getWidth() + (tortueModel.getX()%dimension.getWidth())));
+        }
+        if (tortueModel.getX() > dimension.getWidth()) {
+            tortueModel.setX((int)(tortueModel.getX()%dimension.getWidth()));
+        }
+        if (tortueModel.getY() < 0) {
+            tortueModel.setY((int)(dimension.getHeight() + (tortueModel.getY()%dimension.getHeight())));
+        }
+        if (tortueModel.getY() > dimension.getHeight()) {
+            tortueModel.setY((int)(tortueModel.getY()%dimension.getHeight()));
+        }
+
+        Point p = new Point(tortueModel.getX(),tortueModel.getY());
         forme.dessiner(graph, p, tortueModel.getDir());
     }
 

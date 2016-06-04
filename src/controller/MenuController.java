@@ -71,12 +71,14 @@ public class MenuController implements ActionListener {
     private void tortueMobile() {
     	Thread thread = new Thread() {
 			public void run() {
+				int i=0;
                 while (true) {
                 	for (TortueModel tortueModel : model.getListTortues()) {
                 		TortueMobile tortueMobile = (TortueMobile) tortueModel;
                 		tortueMobile.bouger(model.getListTortues());
                 	}
-                	tempo(100);
+					i++;
+					tempo(100);
                 }
 			}
     	};

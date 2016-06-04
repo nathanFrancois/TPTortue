@@ -12,7 +12,8 @@ public class TestSegmentModel {
 	public void testAjoutSegment() {
 		TortueModel tortueModel = new TortueModel();
 		Point pStart = new Point(tortueModel.getX(), tortueModel.getY());
-		tortueModel.avancer(10);
+		tortueModel.setVitesse(10);
+		tortueModel.avancer();
 		Point pEnd = new Point(tortueModel.getX(), tortueModel.getY());
 		
 		assertEquals(1, tortueModel.getListSegments().size());
@@ -25,7 +26,8 @@ public class TestSegmentModel {
 	public void testNonAjoutSegment() {
 		TortueModel tortueModel = new TortueModel();
 		tortueModel.setCrayon(false);
-		tortueModel.avancer(10);
+		tortueModel.setVitesse(10);
+		tortueModel.avancer();
 		
 		assertTrue(tortueModel.getListSegments().isEmpty());
 	}

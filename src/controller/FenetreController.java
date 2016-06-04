@@ -27,7 +27,8 @@ public class FenetreController implements ActionListener {
                 try {
                     int v = getInputValue();
 	            	for (TortueModel tortueModel : model.getListTortues()) {
-	                	tortueModel.avancer(v);
+	                	tortueModel.setVitesse(v);
+                        tortueModel.avancer();
 	                }
                 } catch (NumberFormatException ex) {
                     System.err.println("ce n'est pas un nombre");

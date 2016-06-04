@@ -51,7 +51,7 @@ public class FenetreView extends JFrame {
     }
 
     public void build() {
-    	setTitle("un logo tout simple");
+    	setTitle("les tortues");
         getContentPane().setLayout(new BorderLayout(10,10));
 
         toolBar = new JToolBar();
