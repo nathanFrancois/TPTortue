@@ -2,8 +2,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-public class FeuilleModel {
+public class FeuilleModel extends Observable {
 	
 	private List<TortueModel> listTortues;
 	
@@ -13,14 +14,12 @@ public class FeuilleModel {
 
 	public void addTortue(TortueModel tortueModel) {
 		listTortues.add(tortueModel);
+		setChanged();
+		notifyObservers();
 	}
 
 	public List<TortueModel> getListTortues() {
 		return listTortues;
-	}
-	
-	public TortueModel getFirstTortueModel() {
-		return listTortues.get(0);
 	}
 
 	public void reset() {

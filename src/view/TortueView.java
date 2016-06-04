@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,43 +13,45 @@ import model.TortueModel;
 public class TortueView {
 
     private TortueModel tortueModel;
+    private Forme forme;
+    private List<SegmentView> listSegmentViews;
 
-    public TortueView(TortueModel tortueModel) {
+    public TortueView(TortueModel tortueModel, Forme forme) {
         this.tortueModel = tortueModel;
+        this.forme = forme;
+        listSegmentViews = new ArrayList<SegmentView>();
     }
 
     public void drawTurtle(Graphics graph, Dimension dimension) {
         if (graph==null)
             return;
         
-        //Copie de la liste pour eviter les acces concurrents
-        List<SegmentModel> listSegments = new ArrayList<SegmentModel>(tortueModel.getListSegments());
-        for (SegmentModel segmentModel : listSegments) {
-        	new SegmentView(segmentModel).drawSegment(graph, dimension);
+        updateListSegmentViews();
+        
+        for (SegmentView segmentView : listSegmentViews) {
+        	segmentView.drawSegment(graph, dimension);
         }
 
         Point p = Utils.recadrer(new Point(tortueModel.getX(),tortueModel.getY()), dimension);
-        Polygon arrow = new Polygon();
-
-        double theta=TortueModel.getRatioDegRad()*(-tortueModel.getDir());
-        double alpha=Math.atan( (float)TortueModel.getRb() / (float)TortueModel.getRp() );
-        double r=Math.sqrt( TortueModel.getRp()*TortueModel.getRp() + TortueModel.getRb()*TortueModel.getRb() );
-
-        Point p2=new Point((int) Math.round(p.x+r*Math.cos(theta)),
-                (int) Math.round(p.y-r*Math.sin(theta)));
-
-        arrow.addPoint(p2.x,p2.y);
-        arrow.addPoint((int) Math.round( p2.x-r*Math.cos(theta + alpha) ),
-                (int) Math.round( p2.y+r*Math.sin(theta + alpha) ));
-        arrow.addPoint((int) Math.round( p2.x-r*Math.cos(theta - alpha) ),
-                (int) Math.round( p2.y+r*Math.sin(theta - alpha) ));
-
-        arrow.addPoint(p2.x,p2.y);
-        graph.setColor(Color.green);
-        graph.fillPolygon(arrow);
+        forme.dessiner(graph, p, tortueModel.getDir());
     }
 
-    public TortueModel getTortueModel() {
+    private void updateListSegmentViews() {
+    	//Copie de la liste pour eviter les acces concurrents
+        List<SegmentModel> listSegmentModels = new ArrayList<SegmentModel>(tortueModel.getListSegments());
+        if (listSegmentViews.size() > listSegmentModels.size()) {
+			listSegmentViews.clear();
+		}
+        if (listSegmentViews.size() < listSegmentModels.size()) {
+			int d = listSegmentViews.size();
+			int f = listSegmentModels.size();
+			for (int i=d; i<f; i++) {
+				listSegmentViews.add(new SegmentView(listSegmentModels.get(i)));
+			}
+		}
+	}
+
+	public TortueModel getTortueModel() {
         return tortueModel;
     }
 

@@ -45,9 +45,7 @@ public class MenuController implements ActionListener {
     private void tortueGuidee() {
     	fenetreView.setVisible(true);
     	menuView.setVisible(false);
-    	TortueModel tortueModel = new TortueModel();
-    	tortueModel.addObserver(fenetreView.getFeuille());
-    	model.addTortue(tortueModel);
+    	model.addTortue(new TortueModel());
     }
     
     private void tortueAleatoire() {
@@ -55,9 +53,7 @@ public class MenuController implements ActionListener {
 		menuView.setVisible(false);
 		fenetreView.disableButton();
 		for (int i=0; i<10; i++) {
-			TortueAleatoire tortueAleatoire = new TortueAleatoire();
-			tortueAleatoire.addObserver(fenetreView.getFeuille());
-			model.addTortue(tortueAleatoire);
+			model.addTortue(new TortueAleatoire());
 		}
     	tortueMobile();
     }
@@ -67,9 +63,7 @@ public class MenuController implements ActionListener {
 		menuView.setVisible(false);
 		fenetreView.disableButton();
 		for (int i=0; i<10; i++) {
-			TortueIntelligente tortueIntelligente = new TortueIntelligente();
-			tortueIntelligente.addObserver(fenetreView.getFeuille());
-			model.addTortue(tortueIntelligente);
+			model.addTortue(new TortueIntelligente());
 		}
     	tortueMobile();
     }
