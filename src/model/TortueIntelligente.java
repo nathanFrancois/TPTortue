@@ -1,7 +1,11 @@
 package model;
 
+import com.sun.javafx.geom.Point2D;
+import com.sun.javafx.geom.Vec2d;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class TortueIntelligente extends TortueModel implements TortueMobile {
 
@@ -12,8 +16,8 @@ public class TortueIntelligente extends TortueModel implements TortueMobile {
 	public TortueIntelligente() {
 		super();
 		this.tortuesVision = new ArrayList<>();
-		distanceVision = 50;
-		angleVision = 90;
+		distanceVision = 30;
+		angleVision = 50;
 	}
 	
 	@Override
@@ -21,14 +25,17 @@ public class TortueIntelligente extends TortueModel implements TortueMobile {
 
 		for (TortueModel t : listTortueModels ) {
 
-			if(!t.equals(this)){
-				if(estDansVision(t) && !tortuesVision.contains(t)) {
+			if(!t.equals(this) && !tortuesVision.contains(t)) {
+				if(estDansVision(t) ) {
 					addTortueVision(t);
+				}
+				else {
+					removeTortueVision(t);
 				}
 			}
 		}
 
-		if (this.getTortuesVision().isEmpty()) {
+		if (this.getTortuesVision().size() == 0) {
 			randomVitesse();
 
 			if(getRandom().nextInt(5) > 3){
@@ -40,6 +47,10 @@ public class TortueIntelligente extends TortueModel implements TortueMobile {
 			setDir(directionMoyenne());
 		}
 		avancer();
+	}
+
+	private void removeTortueVision(TortueModel t) {
+		tortuesVision.remove(t);
 	}
 
 	private int vitesseMoyenne(){
@@ -66,21 +77,21 @@ public class TortueIntelligente extends TortueModel implements TortueMobile {
 
 	private boolean estDansVision(TortueModel tortueModel){
 
-		double a = Math.toDegrees(Math.atan2(tortueModel.getY(), tortueModel.getX()));
-		if(a < 0) {
-			a += 360;
-		}
+		int newX = (int) Math.round(getX()+getVitesse()*Math.cos(getRatioDegRad()*getDir()));
+		int newY = (int) Math.round(getY()+getVitesse()*Math.sin(getRatioDegRad()*getDir()));
 
-		if( (Math.sqrt(sqr(getX() - tortueModel.getX()) + sqr(getY() - tortueModel.getY())) < distanceVision )
-				&& (Math.abs(a-getDir()) <= angleVision)) {
+		Point2D a = new Point2D(newX, newY);
+		Point2D b = new Point2D(tortueModel.getX(), tortueModel.getY());
+		Point2D origin = new Point2D(getX(), getY());
+
+		if((getAngle(a, origin, b) <= angleVision)
+				&& (Math.sqrt(sqr(getX() - tortueModel.getX()) + sqr(getY() - tortueModel.getY())) < distanceVision )) {
 			return true;
 		}
 		return false;
 	}
 
-	private double sqr(double a) {
-		return a*a;
-	}
+
 
 	public List<TortueModel> getTortuesVision() {
 		return tortuesVision;
@@ -92,5 +103,28 @@ public class TortueIntelligente extends TortueModel implements TortueMobile {
 
 	public void addTortueVision(TortueModel tortueModel) {
 		tortuesVision.add(tortueModel);
+	}
+
+	public double getAngle(Point2D a, Point2D origine, Point2D c) {
+
+		Vec2d v1 = vector(a, origine);
+		Vec2d v2 = vector(c, origine);
+
+		double cosA = (v1.x*v2.x + v1.y*v2.y) / (Math.sqrt( sqr(v1.x)+sqr(v1.y) )*Math.sqrt( sqr(v2.x)+sqr(v2.y) ) );
+
+		double aRad = Math.toDegrees(Math.acos(cosA));
+
+		return aRad;
+	}
+
+	private double sqr(double a) {
+		return a*a;
+	}
+
+	public static Vec2d vector(Point2D a, Point2D b) {
+		return new Vec2d(
+				b.x-a.x,
+				b.y-a.y
+		);
 	}
 }

@@ -73,12 +73,12 @@ public class MenuController implements ActionListener {
 			public void run() {
 				int i=0;
                 while (true) {
-                	for (TortueModel tortueModel : model.getListTortues()) {
+					tempo(100);
+					for (TortueModel tortueModel : model.getListTortues()) {
                 		TortueMobile tortueMobile = (TortueMobile) tortueModel;
                 		tortueMobile.bouger(model.getListTortues());
                 	}
 					i++;
-					tempo(100);
                 }
 			}
     	};

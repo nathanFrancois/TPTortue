@@ -23,8 +23,8 @@ public class TortueModel extends Observable {
 	public TortueModel() {
     	listSegments = new ArrayList<SegmentModel>();
     	random = new Random();
-    	xInit = random.nextInt(1000);
-    	yInit = random.nextInt(1000);
+    	xInit = random.nextInt(400);
+    	yInit = random.nextInt(400);
     	reset();
     }
     
@@ -199,9 +199,9 @@ public class TortueModel extends Observable {
     }
 
     protected void randomVitesse() {
-        setVitesse(random.nextInt(40));
+        setVitesse(random.nextInt(20));
         while (getVitesse() == 0) {
-            setVitesse(random.nextInt(40));
+            setVitesse(random.nextInt(20));
         }
     }
 
