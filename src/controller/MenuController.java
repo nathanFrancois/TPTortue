@@ -52,7 +52,7 @@ public class MenuController implements ActionListener {
     	fenetreView.setVisible(true);
 		menuView.setVisible(false);
 		fenetreView.disableButton();
-		for (int i=0; i<10; i++) {
+		for (int i=0; i<3; i++) {
 			model.addTortue(new TortueAleatoire());
 		}
     	tortueMobile();
