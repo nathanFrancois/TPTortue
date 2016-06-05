@@ -33,7 +33,8 @@ public class TortueIntelligente extends TortueModel implements TortueMobile {
 
 		if (this.getTortuesVision().isEmpty()) {
 			randomVitesse();
-			if(getVitesse() > 20){
+
+			if(random.nextInt(3) > 1){
 				randomAngle();
 			}
 		}
@@ -59,7 +60,7 @@ public class TortueIntelligente extends TortueModel implements TortueMobile {
 		int sommeDirection = 0;
 
 		for (TortueModel t : getTortuesVision()) {
-			sommeDirection += t.getVitesse();
+			sommeDirection += t.getDir();
 		}
 		sommeDirection = (sommeDirection+getDir())/(getTortuesVision().size()+1);
 
