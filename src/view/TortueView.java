@@ -10,6 +10,8 @@ import java.util.List;
 import model.SegmentModel;
 import model.TortueModel;
 
+import javax.rmi.CORBA.Util;
+
 public class TortueView {
 
     private TortueModel tortueModel;
@@ -32,7 +34,7 @@ public class TortueView {
         	segmentView.drawSegment(graph, dimension);
         }
 
-        if (tortueModel.getX() < 0) {
+        /*if (tortueModel.getX() < 0) {
             tortueModel.setX((int)(dimension.getWidth() + (tortueModel.getX()%dimension.getWidth())));
         }
         if (tortueModel.getX() > dimension.getWidth()) {
@@ -43,9 +45,9 @@ public class TortueView {
         }
         if (tortueModel.getY() > dimension.getHeight()) {
             tortueModel.setY((int)(tortueModel.getY()%dimension.getHeight()));
-        }
+        }*/
 
-        Point p = new Point(tortueModel.getX(),tortueModel.getY());
+        Point p = Utils.recadrer(new Point(tortueModel.getX(),tortueModel.getY()), dimension);
         forme.dessiner(graph, p, tortueModel.getDir());
     }
 

@@ -18,10 +18,11 @@ public class TortueModel extends Observable {
     private int couleur;
     private int xInit, yInit;
     private int vitesse;
+    private Random random;
 
 	public TortueModel() {
     	listSegments = new ArrayList<SegmentModel>();
-    	Random random = new Random();
+    	random = new Random();
     	xInit = random.nextInt(1000);
     	yInit = random.nextInt(1000);
     	reset();
@@ -192,4 +193,19 @@ public class TortueModel extends Observable {
 			n = n+1;
 		}
 	}
+
+    public Random getRandom() {
+        return this.random;
+    }
+
+    protected void randomVitesse() {
+        setVitesse(random.nextInt(40));
+        while (getVitesse() == 0) {
+            setVitesse(random.nextInt(40));
+        }
+    }
+
+    protected void randomAngle() {
+        setDir(random.nextInt(360));
+    }
 }

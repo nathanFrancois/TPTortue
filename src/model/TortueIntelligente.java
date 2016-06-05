@@ -2,18 +2,15 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class TortueIntelligente extends TortueModel implements TortueMobile {
 
 	private List<TortueModel> tortuesVision;
 	private int angleVision;
 	private int distanceVision;
-	private Random random;
 
 	public TortueIntelligente() {
 		super();
-		random = new Random();
 		this.tortuesVision = new ArrayList<>();
 		distanceVision = 50;
 		angleVision = 90;
@@ -34,7 +31,7 @@ public class TortueIntelligente extends TortueModel implements TortueMobile {
 		if (this.getTortuesVision().isEmpty()) {
 			randomVitesse();
 
-			if(random.nextInt(5) > 3){
+			if(getRandom().nextInt(5) > 3){
 				randomAngle();
 			}
 		}
@@ -95,16 +92,5 @@ public class TortueIntelligente extends TortueModel implements TortueMobile {
 
 	public void addTortueVision(TortueModel tortueModel) {
 		tortuesVision.add(tortueModel);
-	}
-
-	private void randomVitesse() {
-		setVitesse(random.nextInt(40));
-		while (getVitesse() == 0) {
-			setVitesse(random.nextInt(40));
-		}
-	}
-
-	private void randomAngle() {
-		setDir(random.nextInt(360));
 	}
 }
