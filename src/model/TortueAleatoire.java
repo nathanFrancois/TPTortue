@@ -5,44 +5,29 @@ import java.util.Random;
 
 public class TortueAleatoire extends TortueModel implements TortueMobile {
 	
-	private boolean orientation;
-	private int vitesse;
-	private int angle;
 	private Random random;
 	
 	public TortueAleatoire() {
 		super();
-		orientation = false;
-		vitesse = 0;
-		angle = 0;
 		random = new Random();
 	}
 	
 	@Override
 	public void bouger(List<TortueModel> listTortueModels) {
-		randomOrientation();
 		randomVitesse();
-		randomAngle();
 
-		if (orientation) {
-			droite(angle);
-		} else {
-			gauche(angle);
+		if(random.nextInt(5) > 3) {
+			randomAngle();
 		}
-		setVitesse(vitesse);
 		avancer();
 	}
 	
 	private void randomVitesse() {
-		vitesse = random.nextInt(50);
+		setVitesse(random.nextInt(50));
 	}
 	
 	private void randomAngle() {
-		angle = random.nextInt(360);
-	}
-	
-	private void randomOrientation() {
-		orientation = random.nextBoolean();
+		setDir(random.nextInt(360));
 	}
 
 }

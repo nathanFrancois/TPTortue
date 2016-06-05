@@ -16,7 +16,7 @@ public class TortueIntelligente extends TortueModel implements TortueMobile {
 		random = new Random();
 		this.tortuesVision = new ArrayList<>();
 		distanceVision = 50;
-		angleVision = 180;
+		angleVision = 90;
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public class TortueIntelligente extends TortueModel implements TortueMobile {
 		if (this.getTortuesVision().isEmpty()) {
 			randomVitesse();
 
-			if(random.nextInt(3) > 1){
+			if(random.nextInt(5) > 3){
 				randomAngle();
 			}
 		}
