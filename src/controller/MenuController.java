@@ -52,7 +52,7 @@ public class MenuController implements ActionListener {
     	fenetreView.setVisible(true);
 		menuView.setVisible(false);
 		fenetreView.disableButton();
-		for (int i=0; i<3; i++) {
+		for (int i=0; i<8; i++) {
 			model.addTortue(new TortueAleatoire());
 		}
     	tortueMobile();
@@ -62,8 +62,10 @@ public class MenuController implements ActionListener {
     	fenetreView.setVisible(true);
 		menuView.setVisible(false);
 		fenetreView.disableButton();
-		for (int i=0; i<10; i++) {
-			model.addTortue(new TortueIntelligente());
+		for (int i=0; i<20; i++) {
+			TortueIntelligente tortueIntelligente = new TortueIntelligente();
+			tortueIntelligente.setCrayon(false);
+			model.addTortue(tortueIntelligente);
 		}
     	tortueMobile();
     }
@@ -71,14 +73,12 @@ public class MenuController implements ActionListener {
     private void tortueMobile() {
     	Thread thread = new Thread() {
 			public void run() {
-				int i=0;
                 while (true) {
-					tempo(100);
 					for (TortueModel tortueModel : model.getListTortues()) {
                 		TortueMobile tortueMobile = (TortueMobile) tortueModel;
                 		tortueMobile.bouger(model.getListTortues());
                 	}
-					i++;
+					tempo(100);
                 }
 			}
     	};

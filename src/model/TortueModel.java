@@ -1,6 +1,8 @@
 package model;
 
-import java.awt.Point;
+import view.Utils;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -23,15 +25,15 @@ public class TortueModel extends Observable {
 	public TortueModel() {
     	listSegments = new ArrayList<SegmentModel>();
     	random = new Random();
-    	xInit = random.nextInt(400);
-    	yInit = random.nextInt(400);
-    	reset();
+    	xInit = random.nextInt(600);
+        yInit = random.nextInt(500);
+        reset();
     }
     
     public void reset() {
 		x = xInit;
 		y = yInit;
-		dir = -90;
+		dir = 270;
 		couleur = 0;
 		crayon = true;
 		listSegments.clear();
@@ -61,6 +63,7 @@ public class TortueModel extends Observable {
         }
 
         setPosition(newX, newY);
+
         draw();
     }
     
@@ -199,13 +202,13 @@ public class TortueModel extends Observable {
     }
 
     protected void randomVitesse() {
-        setVitesse(random.nextInt(20));
+        setVitesse(random.nextInt(15));
         while (getVitesse() == 0) {
-            setVitesse(random.nextInt(20));
+            setVitesse(random.nextInt(15));
         }
     }
 
     protected void randomAngle() {
-        setDir(random.nextInt(360));
+            setDir(random.nextInt(180));
     }
 }

@@ -11,7 +11,7 @@ public class TestTortueModel {
 	public void testInstanciationTortue() {
 		TortueModel tortueModel = new TortueModel();
 		tortueModel.getDir();
-		assertEquals(-90, tortueModel.getDir());
+		assertEquals(270, tortueModel.getDir());
 		assertTrue(tortueModel.getListSegments().isEmpty());
 		assertTrue(tortueModel.isCrayon());
 	}
@@ -21,7 +21,7 @@ public class TestTortueModel {
 		TortueModel tortueModel = new TortueModel();
 		int x = tortueModel.getX();
 		int y = tortueModel.getY();
-		tortueModel.setDir(-90);
+		tortueModel.setDir(270);
 		tortueModel.setVitesse(1);
 		tortueModel.avancer();
 		assertEquals(x, tortueModel.getX());

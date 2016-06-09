@@ -4,6 +4,7 @@ import com.sun.javafx.geom.Point2D;
 import com.sun.javafx.geom.Vec2d;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TortueIntelligente extends TortueModel implements TortueMobile {
 
@@ -14,8 +15,8 @@ public class TortueIntelligente extends TortueModel implements TortueMobile {
 	public TortueIntelligente() {
 		super();
 		this.tortuesVision = new ArrayList<>();
-		distanceVision = 45;
-		angleVision = 45;
+		distanceVision = 25;
+		angleVision = 40;
 	}
 	
 	@Override
@@ -28,9 +29,8 @@ public class TortueIntelligente extends TortueModel implements TortueMobile {
 			}
 		}
 
-		if (getTortuesVision().size() == 0) {
+		if (getTortuesVision().isEmpty()) {
 			randomVitesse();
-
 			if(getRandom().nextInt(5) > 3){
 				randomAngle();
 			}

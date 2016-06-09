@@ -1,7 +1,6 @@
 package model;
 
 import java.util.List;
-import java.util.Random;
 
 public class TortueAleatoire extends TortueModel implements TortueMobile {
 

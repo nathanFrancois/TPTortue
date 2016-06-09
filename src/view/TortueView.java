@@ -46,8 +46,9 @@ public class TortueView {
         if (tortueModel.getY() > dimension.getHeight()) {
             tortueModel.setY((int)(tortueModel.getY()%dimension.getHeight()));
         }
-
         Point p = new Point(tortueModel.getX(),tortueModel.getY());
+
+        //Point p = Utils.recadrer(new Point(tortueModel.getX(), tortueModel.getY()), dimension);
         forme.dessiner(graph, p, tortueModel.getDir());
     }
 
